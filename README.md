@@ -1,3 +1,5 @@
+![readmeImg/n-festival.png](readmeImg/n-festival2.png)
+
 # N-Festival applicatie
 
 > Deze repository is gevorked van: [https://github.com/tijsluitse/n-festival](https://github.com/tijsluitse/n-festival) waar we in hebben gewerkt tijdens gedurdende dit project. Alle aanpassingen zijn daarin te zien.
