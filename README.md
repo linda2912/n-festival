@@ -78,7 +78,7 @@ package.json
 ```
 
 ##Installeer de app
-Om de app op je eigen computer te instaleren moet je deze repo clonen. Open vervolgens je terminal en ga naar hoofdmap van de app. Instaleer dan vervolgens eerst de node modules
+Om de app op je eigen computer te installeren moet je deze repo clonen. Open vervolgens je terminal en ga naar hoofdmap van de app. Instaleer dan vervolgens eerst de node modules
 
 ``` 
 npm install 
