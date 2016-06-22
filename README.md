@@ -12,7 +12,7 @@
 
 
 ## Live versie
-[https://nfest.lisaklein.nl]()
+[https://nfest.lisaklein.nl](https://nfest.lisaklein.nl)
 
 
 ## Wat is N-festival
