@@ -60,6 +60,8 @@ start de app
 nodemon app.js 
 ```
 
+#Features
+
 ##Loader
 
 * Feedback naar de gebruiker bij het laden van de kaart. Er wordt tijdelijk een wazige achtergrond afbeelding van een kaart getoond zodat de gebruiker ziet dat daar een kaart ingeladen wordt.
@@ -79,7 +81,7 @@ nodemon app.js
 }
 ```
 
-* Feedback naar de gebruiker bij het laden van de afstand tot een evenement. Ik heb dit gedaan door middel van een CSS animatie.
+* Feedback naar de gebruiker bij het laden van de afstand tot een evenement. Ik heb dit gedaan door middel van een CSS animatie. Zodra de afstand geladen is, wordt de loader vervangen door de afstand.
 
 <img src="readmeImg/loader.gif" alt="loader" width=80>
 
@@ -145,6 +147,60 @@ nodemon app.js
 }
 ```
 
+##Testen op het device lab
+Ik heb de app gestest op het device lab en CSS fallbacks voor iedere browser geschreven zodat de app er overal hetzelfde uitziet en goed werkt. In de standaard browser van Samsung ging de app het meest stuk. Daar ben ik dan ook mee begonnen met optimaliseren.
+
+![readmeImg/deviceLab.jpg](readmeImg/deviceLab.jpg)
+
+####Prefixes flexbox
+
+```
+display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-align: center;
+-webkit-align-items: center;
+-ms-flex-align: center;
+align-items: center;
+-webkit-box-pack: center;
+-webkit-justify-content: center;
+-ms-flex-pack: center;
+justify-content: center;
+```
+####Fallback viewwidth
+```
+width: 100%;
+width: 100vw;
+```
+####Prefixes filter
+```
+-webkit-filter: grayscale(100%);
+-moz-filter: grayscale(100%);
+-o-filter: grayscale(100%);
+-ms-filter: grayscale(100%);
+filter: grayscale(100%);
+```       
+####Prefix keyframes & animatie
+```
+...
+-webkit-animation: added 500ms ease-in-out;
+animation: added 500ms ease-in-out;
+}
+
+@-webkit-keyframes added {
+    0% { ...
+```
+
+####Prefix transform
+```
+-webkit-transform: translateX(0);
+-ms-transform: translateX(0);
+transform: translateX(0);
+
+```
+
+
 ##Evenement delen via Social Media
 Om een dynamische link te maken voor het delen van alle evenementen heb ik handlebars gebruikt. 
 
@@ -186,7 +242,9 @@ Om een dynamische terug knop te maken heb ik eerst bepaald op welke pagina's een
 ```
 
 ##Nieuws slideshow
-De nieuws slider is alleen gemaakt met HTML en CSS animaties. De slideshow bevat altijd maximaal 3 news items (bepaald door de opdrachtgever) waardoor ik bepaald had deze feature te maken met alleen CSS. De news items glijden over elkaar heen door middel van ```transform: translateX```. Om ervoor te zorgen dat ze niet door elkaar heen gaan heb ik gebruik gemaakt van ```z-index```.
+De nieuws slider is gemaakt met alleen HTML en CSS animaties. De slideshow bevat altijd maximaal 3 nieuws items (bepaald door de opdrachtgever) waardoor ik er voor gekozen had deze feature te maken met alleen CSS. De nieuws items glijden over elkaar heen door middel van ```transform: translateX```. Om ervoor te zorgen dat ze niet door elkaar heen gaan heb ik gebruik gemaakt van ```z-index```.
+
+> Bekijk [live](https://nfest.lisaklein.nl/#menu)
 
 <img src="readmeImg/slider.png" alt="loader" width=280>
 
@@ -336,7 +394,7 @@ De stroke-dasharray: 160; bepaald de ruimte tussen de strepen. Vervolgens maak i
 ```
 
 
-## Taakverdeling
+# Taakverdeling
 We hebben ervoor gekozen om taken op te delen door middel van features op te zetten in Trello en die te verdelen. Op deze manier geeft iedereen zijn bijdrage aan de vakken Web App From Scratch, Css To The Rescue, Browser Technologies en Performance Matters.
 
 ![readmeImg/trello.png](readmeImg/trello.png)
@@ -371,14 +429,14 @@ We hebben ervoor gekozen om taken op te delen door middel van features op te zet
 * Gulp, minified js en CSS files voor een snellere laadtijd.
 * Geoptimaliseerde http requests: Javascript files worden alleen geladen op de pagina's waar ze nodig zijn.
 
-## Wat ik heb gedaan de afgelopen 5 weken
+## Mijn bijdrage de afgelopen 5 weken
 #### Week 1
 * Schetsen van de app
 * HTML en CSS opzet voor de index pagina
 * Design voor de app
 
 #### Week 2
-* Wireframe
+* Wireframes
 ![readmeImg/wireframe.jpg](readmeImg/wireframe.jpg)
 * Menu + werkend in css zonder js op iedere pagina
 * Toevoegen aan mijn route button HTML en CSS animatie
@@ -408,7 +466,7 @@ We hebben ervoor gekozen om taken op te delen door middel van features op te zet
 * Homescreen icoon
 * Discover designen CSS
 * Testen op alle Device lab
-![readmeImg/deviceLab.jpg](readmeImg/deviceLab.jpg)
+
 
 #### Week 5
 * Design van Ruben toepassen
