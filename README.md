@@ -6,7 +6,7 @@
 
 > Deze repository is gevorkt van [https://github.com/tijsluitse/n-festival](https://github.com/tijsluitse/n-festival). Hier is dan ook het proces van het project terug te zien.
 
-> ####Medewerkers:
+> ####In samenwerking met:
 
 > * Tijs Luitse - [https://github.com/tijsluitse](https://github.com/tijsluitse)
 > * Lisa Klein - [https://github.com/sayLISA](https://github.com/sayLISA)
@@ -210,7 +210,7 @@ Om een dynamische link te maken voor het delen van alle evenementen heb ik handl
 <a href="http://www.facebook.com/sharer.php?u=http://nfest.lisaklein.nl/detail/{{slug}}&t={{{title.rendered}}}" target="black" class="shareSocialMedia facebookIcon">
 ```
 
-##Terug knop
+##Dynamische Terug knop
 
 
 Om een dynamische terug knop te maken heb ik eerst bepaald op welke pagina's een terugknop moet komen. Dat zijn alle pagina's waar twee "/" inzitten en de /myroute pagina. Vervolgens wordt op die pagina's het menu icoon vervangen door een terugknop. De terugknop krijgt een onclick function ```window.history.back();``` die er altijd voor zorgt dat je naar de vorig bezochte pagina terug gaat.
@@ -342,7 +342,7 @@ De nieuws slider is gemaakt met alleen HTML en CSS animaties. De slideshow bevat
 
 Zie de animatie op [codepen](http://codepen.io/Lindavandijk/pen/JKbGxw)
 
-<img src="readmeImg/intro.png" alt="loader" width=180>
+<img src="readmeImg/intro.png" alt="intro" width=180>
 
 Ik heb deze animatie gemaakt met een SVG door middel van @keyframes en animation. De lijn om de N animeer ik door middel van de stroke-dashoffset: 200; te veranderen. Zie hier een eenvoudiger [voorbeeld](http://codepen.io/Lindavandijk/pen/zBNPyq).
 
@@ -392,7 +392,41 @@ De stroke-dasharray: 160; bepaald de ruimte tussen de strepen. Vervolgens maak i
   }
 }
 ```
+De animatie wordt alleen getoond als de gebruiker voor het eerst de app opent. Dit heb ik gedaan door middel van het in localStorage op te slaan en vervolgens te kijken of het al in localStorage zit.
 
+```
+/* If user lands for the first time, show introduction animation */
+    var introEnd = function () {
+        var introPage = document.querySelector('.introPage');
+
+        if (!localStorage.getItem('introPage')) {
+            introPage.classList.remove('hide');
+            setTimeout(function () {  
+                introPage.style.opacity = '0';            
+                introPage.classList.add('hide');
+                localStorage.setItem('introPage', 'true');
+            }, 2800);
+        }
+    };
+```
+
+
+##Fallback voor afbeelding
+Als er geen foto word toegevoegt aan een event, curator of locatie, heb ik fallback geschreven zodat er geen lege plek ontstaat. Ik kijk eerst of er een foto in de data staat ```{{#if acf.picture.sizes.medium}} ``` zo ja, wordt die foto geplaatst. Zo niet, wordt er een standaard afbeelding geplaatst.
+
+<img src="readmeImg/curator.png" alt="loader" width=180> <img src="readmeImg/event1.png" alt="loader" width=180>
+
+<img src="readmeImg/curator1.png" alt="loader" width=180> <img src="readmeImg/event.png" alt="loader" width=180>
+
+
+
+```
+{{#if acf.picture.sizes.medium}} 
+	<div class="eventImg" style="background-image: url('{{acf.picture.sizes.medium}}');"></div>
+	{{else}}
+	<div class="eventImg" style="background-image: url('/img/fallbackLocation.png');"></div>
+{{/if}}
+```
 
 # Taakverdeling
 We hebben ervoor gekozen om taken op te delen door middel van features op te zetten in Trello en die te verdelen. Op deze manier geeft iedereen zijn bijdrage aan de vakken Web App From Scratch, Css To The Rescue, Browser Technologies en Performance Matters.
