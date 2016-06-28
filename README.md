@@ -60,11 +60,11 @@ start de app
 nodemon app.js 
 ```
 
-###Loader
+##Loader
 
 * Feedback naar de gebruiker bij het laden van de kaart. Er wordt tijdelijk een wazige afbeelding van een kaart getoond zodat de gebruiker ziet dat daar een kaart ingeladen wordt.
 
-![public/img/amsterdamNoord.png](public/img/amsterdamNoord.png)
+<img src="public/img/amsterdamNoord.png" alt="loader" width=280>
 
 ```
 #locationMap {
@@ -79,7 +79,7 @@ nodemon app.js
 }
 ```
 
-* Feedback naar de gebruiker bij het laden van de afstand tot een evenement.
+* Feedback naar de gebruiker bij het laden van de afstand tot een evenement. Ik heb dit gedaan door middel van een CSS animatie.
 
 <img src="readmeImg/loader.gif" alt="loader" width=80>
 
@@ -145,7 +145,8 @@ nodemon app.js
 }
 ```
 
-###Evenement delen via Social Media
+##Evenement delen via Social Media
+Om een dynamische link te maken voor het delen van alle evenementen heb ik handlebars gebruikt. 
 
 <img src="readmeImg/socialMedia.png" alt="loader" width=140>
 
@@ -153,8 +154,14 @@ nodemon app.js
 <a href="http://www.facebook.com/sharer.php?u=http://nfest.lisaklein.nl/detail/{{slug}}&t={{{title.rendered}}}" target="black" class="shareSocialMedia facebookIcon">
 ```
 
-###Terug knop
+##Terug knop
+
+
+Om een dynamische terug knop te maken heb ik eerst bepaald op welke pagina's een terugknop moet komen. Dat zijn alle pagina's waar twee "/" inzitten en de /myroute pagina. Vervolgens wordt op die pagina's het menu icoon vervangen door een terugknop. De terugknop krijgt een onclick function ```window.history.back();``` die er altijd voor zorgt dat je naar de vorig bezochte pagina terug gaat.
+
 <img src="readmeImg/backButton.png" alt="loader" width=30>
+
+
 
 ```
 /* Dynamic back button for whole application duration */
@@ -178,7 +185,9 @@ nodemon app.js
     };
 ```
 
-###Nieuws slideshow alleen HTML en CSS
+##Nieuws slideshow
+De nieuws slider is alleen gemaakt met HTML en CSS animaties. De slideshow bevat altijd maximaal 3 news items (bepaald door de opdrachtgever) waardoor ik bepaald had deze feature te maken met alleen CSS. De news items glijden over elkaar heen door middel van ```transform: translateX```. Om ervoor te zorgen dat ze niet door elkaar heen gaan heb ik gebruik gemaakt van ```z-index```.
+
 <img src="readmeImg/slider.png" alt="loader" width=280>
 
 ```
@@ -270,19 +279,62 @@ nodemon app.js
 }
 ```
 
-###Fallback voor als er geen image wordt toegevoegd aan evenement, curator of loactie
 
-###Intro animatie
-<p data-height="709" data-theme-id="dark" data-slug-hash="JKbGxw" data-default-tab="result" data-user="Lindavandijk" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/Lindavandijk/pen/JKbGxw/">N-FESTIVAL</a> by Linda (<a href="http://codepen.io/Lindavandijk">@Lindavandijk</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-				<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+##Intro animatie
 
+Zie de animatie op [codepen](http://codepen.io/Lindavandijk/pen/JKbGxw)
 
-#Project verloop
+<img src="readmeImg/intro.png" alt="loader" width=180>
 
-## Team
-Ik heb dit project uitgevoerd samen met Lisa Klein en Tijs Luitse zodat wij een product konden neerzetten die direct gebruikt kan worden.
+Ik heb deze animatie gemaakt met een SVG door middel van @keyframes en animation. De lijn om de N animeer ik door middel van de stroke-dashoffset: 200; te veranderen. Zie hier een eenvoudiger [voorbeeld](http://codepen.io/Lindavandijk/pen/zBNPyq).
 
-Tijdens het project heeft iedereen een beroepsrol op zich genomen. Lisa was de Back-end Developer, Tijs was de Front-end Developer en ik was de Front-end Designer.
+De stroke-dasharray: 160; bepaald de ruimte tussen de strepen. Vervolgens maak ik de stroke transparant en de fill white. Daarna laat ik de h1 tekst van rechts inkomen met transform: translateX en als laatst gaat de onderste regel van opacity: 0; naar opacity: 1;
+
+```
+.nFestivalLogo {
+  width: 90%;
+  stroke-dasharray: 160;
+  fill: ;
+  stroke-width: 1;
+  stroke: white;
+  stroke-dashoffset: 200;
+  -webkit-animation: draw 5s linear infinite;
+}
+@-webkit-keyframes draw {
+  0% {
+    fill: transparent;
+    stroke-: white;
+  }
+  30% {
+    fill: transparent;
+  }
+  40% {
+    stroke-width: 1;
+  }
+  50% {
+    fill: white;
+    stroke: white;
+    stroke-dashoffset: 0;
+    stroke-width: 0;
+  }
+  80% {
+    fill: white;
+    stroke-dashoffset: 0;
+    stroke-width: 0;
+  }
+  90% {
+    fill: unset;
+    stroke-dashoffset: 0;
+    stroke-width: 0;
+  }
+  100% {
+    fill: unset;
+    stroke-dashoffset: 0;
+    stroke-width: 0;
+  }
+}
+```
+
 
 ## Taakverdeling
 We hebben ervoor gekozen om taken op te delen door middel van features op te zetten in Trello en die te verdelen. Op deze manier geeft iedereen zijn bijdrage aan de vakken Web App From Scratch, Css To The Rescue, Browser Technologies en Performance Matters.
