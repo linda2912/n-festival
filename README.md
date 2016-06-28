@@ -62,7 +62,7 @@ nodemon app.js
 
 ##Loader
 
-* Feedback naar de gebruiker bij het laden van de kaart. Er wordt tijdelijk een wazige afbeelding van een kaart getoond zodat de gebruiker ziet dat daar een kaart ingeladen wordt.
+* Feedback naar de gebruiker bij het laden van de kaart. Er wordt tijdelijk een wazige achtergrond afbeelding van een kaart getoond zodat de gebruiker ziet dat daar een kaart ingeladen wordt.
 
 <img src="public/img/amsterdamNoord.png" alt="loader" width=280>
 
