@@ -1,18 +1,20 @@
 ![readmeImg/n-festival.png](readmeImg/n-festival2.png)
 
+
+
 # N-Festival applicatie
 
-> Deze repository is gevorked van: [https://github.com/tijsluitse/n-festival](https://github.com/tijsluitse/n-festival) waar we in hebben gewerkt tijdens gedurdende dit project. Alle aanpassingen zijn daarin te zien.
+> Deze repository is gevorkt van [https://github.com/tijsluitse/n-festival](https://github.com/tijsluitse/n-festival). Hier is dan ook het proces van het project terug te zien.
 
 > ####Medewerkers:
 
 > * Tijs Luitse - [https://github.com/tijsluitse](https://github.com/tijsluitse)
 > * Lisa Klein - [https://github.com/sayLISA](https://github.com/sayLISA)
-> * Linda van Dijk - [https://github.com/linda2912](https://github.com/linda2912)
+> 
+> ####Link naar online versie
+> [https://nfest.lisaklein.nl](https://nfest.lisaklein.nl)
 
 
-## Live versie
-[https://nfest.lisaklein.nl](https://nfest.lisaklein.nl)
 
 
 ## Wat is N-festival
@@ -43,39 +45,7 @@ Een applicatie ontwikkelen voor de festivalgangers van het N-festival die zij ti
 4. Als gebruiker wil ik zelf mijn programma kunnen samenstellen en gemaakte keuzes online terug kunnen halen 
 5. Als gebruiker wil ik kunnen zien waar het op dit moment druk is zodat ik eventueel mijn programma daarop kan afstemmen
 
-##Technieken
-* Express
-* HTML 5 met Handlebars
-* CSS
-* Vanilla Javascript
-* Gulp
-* DigitalOcean
 
-## Code structuur
-
-```
-app.js                  //In deze file begint de app
-gulpfile.js
-package.json
-/bin
-/node_modules           //De modules die gebruikt zijn
-/public                 //De public folder bavat alle statische files zoals CSS, js en images
-  /dist                 //De dist folder bevat de minified en prefixed CSS en js
-    /css
-    /js
-    /lib
-  /font                 //De fonts die we gebruiken
-  /img                  //De images die we gebruiken
-  /src                  //De src folder bevat de files waar we in werken die nog niet geminimaliseerd zijn
-    /css
-    /js                 //Client-side JS
-    /lib
-/routes
-  index.js              //Hier worden alle routes gedefinieerd 
-  /views                //Alle templates in handlebars
-  /partials             //Bevat kleine stukken HTML die worden gebruiker in verschillende templates  
-
-```
 
 ##Installeer de app
 Om de app op je eigen computer te installeren moet je deze repo clonen. Open vervolgens je terminal en ga naar hoofdmap van de app. Instaleer dan vervolgens eerst de node modules
@@ -89,6 +59,222 @@ start de app
 ``` 
 nodemon app.js 
 ```
+
+###Loader
+
+* Feedback naar de gebruiker bij het laden van de kaart. Er wordt tijdelijk een wazige afbeelding van een kaart getoond zodat de gebruiker ziet dat daar een kaart ingeladen wordt.
+
+![public/img/amsterdamNoord.png](public/img/amsterdamNoord.png)
+
+```
+#locationMap {
+    background-image: url('../../img/amsterdamNoord.png');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    width: 100vw;
+    height: 50vh;
+    z-index: 1;
+    color: black;
+}
+```
+
+* Feedback naar de gebruiker bij het laden van de afstand tot een evenement.
+
+<img src="readmeImg/loader.gif" alt="loader" width=80>
+
+```
+<div id="distanceCalc" data-location="{{acf.venue.post_name}}">
+	<p class="bikeDist">
+		<span class="kmLoad1">.</span>
+		<span class="kmLoad2">.</span>
+		<span class="kmLoad3">.</span>min
+	</p>
+</div>                                       
+```
+```
+/*DISTANCE LOADER*/
+
+.kmLoad1 {
+    -webkit-animation: kmLoad infinite ease-in-out 1s;
+    animation: kmLoad infinite ease-in-out 1s;
+}
+
+.kmLoad2 {
+    -webkit-animation: kmLoad infinite ease-in-out 1s;
+    animation: kmLoad infinite ease-in-out 1s;
+    -webkit-animation-delay: 300ms;
+    animation-delay: 300ms;
+}
+
+.kmLoad3 {
+    -webkit-animation: kmLoad infinite ease-in-out 1s;
+    animation: kmLoad infinite ease-in-out 1s;
+    -webkit-animation-delay: 600ms;
+    animation-delay: 600ms;
+}
+
+@-webkit-keyframes kmLoad {
+    0% {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    66% {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    100% {
+        opacity: 1;
+        filter: alpha(opacity=100);
+    }
+}
+
+@keyframes kmLoad {
+    0% {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    66% {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    100% {
+        opacity: 1;
+        filter: alpha(opacity=100);
+    }
+}
+```
+
+###Evenement delen via Social Media
+
+<img src="readmeImg/socialMedia.png" alt="loader" width=140>
+
+```
+<a href="http://www.facebook.com/sharer.php?u=http://nfest.lisaklein.nl/detail/{{slug}}&t={{{title.rendered}}}" target="black" class="shareSocialMedia facebookIcon">
+```
+
+###Terug knop
+<img src="readmeImg/backButton.png" alt="loader" width=30>
+
+```
+/* Dynamic back button for whole application duration */
+    var backButton = function () {
+        var eventUrl = window.location.pathname,
+            eventUrl = eventUrl.split('/'),
+            page = eventUrl[1],
+            detailPage = eventUrl[2];
+
+        if (window.location.pathname == '/' + page + '/' + detailPage || window.location.pathname == '/myroute') {
+            document.querySelector('.menuIcon').classList.add('hide');
+            var backButton = document.querySelector('.backButton');
+            backButton.classList.remove('hide');
+            backButton.onclick = function () {
+                window.history.back();
+            }
+        }
+        if (window.location.pathname == '/') {
+            document.querySelector('.menuIcon').classList.add('hide');
+        }
+    };
+```
+
+###Nieuws slideshow alleen HTML en CSS
+<img src="readmeImg/slider.png" alt="loader" width=280>
+
+```
+<article id="newsFeed">
+	{{#firstItems}}
+		<section class="newsItem">
+      		<div class="news">
+				<h1>{{{title.rendered}}}</h1>
+				<p>{{{content.rendered}}}</p>
+			</div>
+		</section>
+	{{/firstItems}}
+</article>
+```
+```
+.newsItem:nth-child(1) {
+    width: 100vw;
+    transform: translateX(-100vw);
+    animation: newSlideOne 20s infinite cubic-bezier(0, 1, 0, 1);
+}
+
+.newsItem:nth-child(2) {
+    width: 100vw;
+    transform: translateX(0);
+    animation: newSlideTwo 20s infinite cubic-bezier(0, 1, 0, 1);
+}
+
+.newsItem:nth-child(3) {
+    width: 100vw;
+    transform: translateX(100vw);
+    animation: newSlideThree 20s infinite cubic-bezier(0, 1, 0, 1);
+}
+
+@-webkit-keyframes newSlideOne {
+    0% {
+        transform: translateX(-100vw);
+        z-index: 11;
+    }
+    33% {
+        transform: translateX(0);
+        z-index: 13;
+    }
+    66% {
+        transform: translateX(100vw);
+        z-index: 12;
+    }
+    100% {
+        transform: translateX(-100vw);
+        z-index: 11;
+    }
+}
+
+@-webkit-keyframes newSlideTwo {
+    0% {
+        transform: translateX(0);
+        z-index: 13;
+    }
+    33% {
+        transform: translateX(100vw);
+        z-index: 12;
+    }
+    66% {
+        transform: translateX(-100vw);
+        z-index: 11;
+    }
+    100% {
+        transform: translateX(0);
+        z-index: 13;
+    }
+}
+
+@-webkit-keyframes newSlideThree {
+    0% {
+        transform: translateX(100vw);
+        z-index: 11;
+    }
+    33% {
+        transform: translateX(-100vw);
+        z-index: 11;
+    }
+    66% {
+        transform: translateX(0);
+        z-index: 13;
+    }
+    100% {
+        transform: translateX(100vw);
+        z-index: 12;
+    }
+}
+```
+
+###Fallback voor als er geen image wordt toegevoegd aan evenement, curator of loactie
+
+###Intro animatie
+<p data-height="709" data-theme-id="dark" data-slug-hash="JKbGxw" data-default-tab="result" data-user="Lindavandijk" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/Lindavandijk/pen/JKbGxw/">N-FESTIVAL</a> by Linda (<a href="http://codepen.io/Lindavandijk">@Lindavandijk</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+				<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
 
 #Project verloop
