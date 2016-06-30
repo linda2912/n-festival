@@ -411,8 +411,8 @@ De animatie wordt alleen getoond als de gebruiker voor het eerst de app opent. D
 ```
 
 
-##Fallback voor afbeelding
-Als er geen foto word toegevoegt aan een event, curator of locatie, heb ik fallback geschreven zodat er geen lege plek ontstaat. Ik kijk eerst of er een foto in de data staat ```{{#if acf.picture.sizes.medium}} ``` zo ja, wordt die foto geplaatst. Zo niet, wordt er een standaard afbeelding geplaatst.
+##Fallback voor afbeeldingen
+Als er geen foto wordt toegevoegt aan een event, curator of locatie, heb ik fallback geschreven zodat er geen lege plek ontstaat. Ik kijk eerst of er een foto in de data staat ```{{#if acf.picture.sizes.medium}} ``` zo ja, wordt die foto geplaatst. Zo niet, wordt er een standaard afbeelding geplaatst.
 
 <img src="readmeImg/curator.png" alt="loader" width=180> <img src="readmeImg/event1.png" alt="loader" width=180>
 
